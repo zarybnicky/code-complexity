@@ -16,3 +16,10 @@ export type Options = {
   filter?: string[];
   format?: Format;
 };
+
+export interface Statistic {
+  path: string;
+  churn: number;
+  complexity: number;
+  score: number;
+}
