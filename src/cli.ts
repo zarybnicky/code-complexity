@@ -35,7 +35,10 @@ export async function parse(): Promise<Options> {
   };
 }
 
-function getRawCli(description: string | undefined, version: string | undefined): Command {
+function getRawCli(
+  description: string | undefined,
+  version: string | undefined
+): Command {
   return program
     .name("code-complexity")
     .usage("<target> [options]")
@@ -45,7 +48,7 @@ function getRawCli(description: string | undefined, version: string | undefined)
     .option(
       "--filter <strings>",
       "list of globs (comma separated) to filter",
-      (xs) => xs.split(',')
+      (xs) => xs.split(",")
     )
     .option(
       "-cs, --complexity-strategy [sloc|cyclomatic|halstead]",
@@ -96,4 +99,3 @@ function getRawCli(description: string | undefined, version: string | undefined)
       ].forEach((example) => console.log(example.padStart(2)));
     });
 }
-

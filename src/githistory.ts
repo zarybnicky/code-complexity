@@ -22,9 +22,12 @@ export function buildGitHistory(options: Options) {
 
     // Windows CMD handle quotes differently
     isWindows ? "*" : "'*'",
-  ].filter((s) => s.length > 0).join(" ");
+  ];
 
-  const stdout = execSync(gitLogCommand, { encoding: "utf8", maxBuffer: 32_000_000 }).split('\n');
+  const stdout = execSync(gitLogCommand.filter((s) => s.length > 0).join(" "), {
+    encoding: "utf8",
+    maxBuffer: 32_000_000,
+  }).split("\n");
   const result = stdout.filter((file) => {
     if (!file.trim().length) {
       return false;
@@ -42,7 +45,7 @@ export function buildGitHistory(options: Options) {
   const files = [...new Set(history)];
 
   const churnByPath = new Map<string, number>();
-  history.forEach(path => {
+  history.forEach((path) => {
     churnByPath.set(path, (churnByPath.get(path) ?? 0) + 1);
   });
 

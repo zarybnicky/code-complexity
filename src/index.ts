@@ -12,7 +12,9 @@ export default async function main(): Promise<void> {
   const options = await parse();
 
   if (options.complexityStrategy !== "sloc") {
-    console.warn("Beware, the 'halstead' and 'cyclomatic' strategies are only available for JavaScript/TypeScript.");
+    console.warn(
+      "Beware, the 'halstead' and 'cyclomatic' strategies are only available for JavaScript/TypeScript."
+    );
   }
   try {
     execSync("which git");
@@ -26,7 +28,12 @@ export default async function main(): Promise<void> {
   const gitHistory = buildGitHistory(options);
   const complexities = await buildComplexity(gitHistory.files, options);
 
-  const statistics = buildStatistics(gitHistory.files, gitHistory.churnByPath, complexities, options);
+  const statistics = buildStatistics(
+    gitHistory.files,
+    gitHistory.churnByPath,
+    complexities,
+    options
+  );
   render(statistics, options);
 }
 
@@ -66,7 +73,8 @@ function toTable(statistics: Statistic[]): string {
 function toCSV(statistics: Statistic[]): string {
   let csv = "file,complexity,churn,score\n";
   statistics.forEach((stat) => {
-    csv += [stat.path, stat.complexity, stat.churn, stat.score].join(",") + "\n";
+    csv +=
+      [stat.path, stat.complexity, stat.churn, stat.score].join(",") + "\n";
   });
   return csv;
 }

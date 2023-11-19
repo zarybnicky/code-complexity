@@ -38,6 +38,16 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "espree": "^3.4.3",
+    "esprima": "^4.0.0",
+    "lodash.assign": "^4.2.0",
+    "lodash.isfunction": "^3.0.8",
+    "lodash.isnil": "^4.0.0",
+    "lodash.isnumber": "^3.0.3",
+    "lodash.isobject": "^3.0.2",
+    "lodash.isstring": "^4.0.1",
+    "lodash.merge": "^4.6.0",
+    "lodash.negate": "^3.0.2",
     "@babel/core": "^7.20.2",
     "@babel/plugin-transform-typescript": "^7.20.2",
     "cli-table3": "^0.6.3",
@@ -70,7 +80,14 @@
     "nyc": "^15.1.0",
     "prettier": "^2.7.1",
     "ts-node": "^10.9.1",
-    "typescript": "^4.8.4"
+    "typescript": "^4.8.4",
+    "acorn": "^5.0.0",
+    "chai": "4.1.0",
+    "mocha": "^3.4.2",
+    "mockery": "2.1.0",
+    "sinon": "^2.0.0",
+    "spooks": "2.0.0",
+    "standard": "^10.0.0"
   },
   "bundleDependencies": [
     "esprima"

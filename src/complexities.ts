@@ -4,9 +4,7 @@ import { createReadStream, readFileSync } from "node:fs";
 import { extname, resolve } from "node:path";
 import { Options, Path } from "./types";
 import { buildDebugger } from "./utils";
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const escomplex = require("escomplex");
+import * as escomplex from "./escomplex";
 
 const internal = { debug: buildDebugger("halstead") };
 
@@ -29,7 +27,7 @@ export async function buildComplexity(paths: Path[], options: Options) {
           result = await computeSloc(absolutePath);
       }
       map.set(p, result);
-    }),
+    })
   );
   return map;
 }
@@ -85,7 +83,7 @@ function fromTypeScript(path: string): number {
 }
 
 async function computeSloc(absolutePath: string): Promise<number> {
-  let result = await sloc({ path: absolutePath });
+  const result = await sloc({ path: absolutePath });
   if (result?.sloc) {
     return result?.sloc;
   } else {
@@ -109,6 +107,6 @@ async function countLineNumbers(absolutePath: string): Promise<number> {
           }
         }
       })
-      .on("end", () => resolve(count))
+      .on("end", () => resolve(count));
   });
 }

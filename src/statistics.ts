@@ -17,7 +17,7 @@ export function buildStatistics(
     ? buildDirectoryStatistics(statisticsForFiles)
     : statisticsForFiles;
 
-  result = result.sort(sort(options.sort))
+  result = result.sort(sort(options.sort));
   if (options.limit) {
     result = result.slice(0, options.limit);
   }
@@ -43,15 +43,25 @@ function sort(sort: Sort | undefined) {
   };
 }
 
-export function buildDirectoryStatistics(statisticsForFiles: Statistic[]): Statistic[] {
+export function buildDirectoryStatistics(
+  statisticsForFiles: Statistic[]
+): Statistic[] {
   const map = new Map<string, Statistic>();
   statisticsForFiles.forEach((statisticsForFile) => {
-    findDirectoriesForFile(statisticsForFile.path).forEach((directoryForFile) => {
-      const statisticsForDir = map.get(directoryForFile);
-      const churn = statisticsForFile.churn + (statisticsForDir?.churn ?? 0);
-      const complexity = statisticsForFile.complexity + (statisticsForDir?.complexity ?? 0);
-      map.set(directoryForFile, { path: directoryForFile, churn, complexity, score: churn * complexity });
-    });
+    findDirectoriesForFile(statisticsForFile.path).forEach(
+      (directoryForFile) => {
+        const statisticsForDir = map.get(directoryForFile);
+        const churn = statisticsForFile.churn + (statisticsForDir?.churn ?? 0);
+        const complexity =
+          statisticsForFile.complexity + (statisticsForDir?.complexity ?? 0);
+        map.set(directoryForFile, {
+          path: directoryForFile,
+          churn,
+          complexity,
+          score: churn * complexity,
+        });
+      }
+    );
   });
   return [...map.values()];
 }
